@@ -5,4 +5,5 @@ granting permissoins to those data bases -> command
 GRANT ALL PRIVILEGES ON trello_test.* TO 'newuser'@'localhost';
 user i have created for the first time
 rails db:schema:dump -> to see data base connection is working or not
-
+rails g devise User -> to generate model of user
+rails g model User and rails db:migrate -> rails console(restart server)
