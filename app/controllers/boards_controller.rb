@@ -11,12 +11,20 @@ class BoardsController < ApplicationController
     if @board.save
       redirect_to(home_index_path)
     else
-      puts @board.errors.messages,'---------->'
+      # flash notice
+      # puts @board.errors.messages,'---------->'
       render(:action => 'new')
     end
   end
+
   
-  
+  def destroy
+    @board = Board.find(params[:id])
+    @board.destroy
+    redirect_to(home_index_path)
+  end
+
+
   private
   
   def board_params
