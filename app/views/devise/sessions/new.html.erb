@@ -11,6 +11,7 @@
     <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
+  
 
   <% if devise_mapping.rememberable? %>
     <div class="field">
@@ -19,7 +20,7 @@
     </div>
   <% end %>
 
-  <div class="actions">
+  <div class="btn-group" role="group" aria-label="Basic example">
     <%= f.submit "Log in" %>
   </div>
 <% end %>
