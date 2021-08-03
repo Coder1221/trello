@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :Boards
+  
   attr_accessor :login
 
   # Include default devise modules. Others available are:
@@ -6,7 +8,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable 
 
-  has_many :Boards
 
   def self.find_for_database_authentication warden_condition
     conditions = warden_condition.dup

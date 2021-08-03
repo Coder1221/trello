@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2021_08_03_065836) do
 
   create_table "boards", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
-    t.string "name"
+    t.string "name", default: "", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_boards_on_name"
