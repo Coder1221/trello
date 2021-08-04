@@ -10,3 +10,10 @@ rails g model User and rails db:migrate -> rails console(restart server)
 IMP -> TO generate model use rails g model Board -> it will automatically generate model file ,migtration file called by active record and test units
 
 if we generate migration to create data base then we have to create model/board.rb to see the Board object in console and in other app
+
+
+->>> this branch in on development -> using postgress
+rails db:system:change -to=postgresql --> that changed to postgress
+and then 
+we create and migrate on db
+rails db:create db:migrate
