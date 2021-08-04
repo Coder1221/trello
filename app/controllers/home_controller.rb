@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 
   def index
     @user_obj = User.find_by_id(current_user.id)  
-    @boards  = @user_obj.Boards
+    @boards  = @user_obj.boards
   end
   
 end

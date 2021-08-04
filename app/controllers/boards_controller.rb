@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController  
+  before_action :authenticate_user!
   
   def new
       @board = Board.new
@@ -16,14 +17,12 @@ class BoardsController < ApplicationController
       render(:action => 'new')
     end
   end
-
   
   def destroy
     @board = Board.find(params[:id])
     @board.destroy
     redirect_to(home_index_path)
   end
-
 
   private
   
