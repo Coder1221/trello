@@ -6,7 +6,7 @@ ruby '3.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5'
+gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -26,7 +26,7 @@ gem 'devise'
 # gem 'image_processing', '~> 1.2'
 
 #  added post gress
-gem 'pg', '~> 0.18.4' 
+gem 'pg', '~> 1.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
