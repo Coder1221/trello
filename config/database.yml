@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: trello_production
-  username: trello
-  password: <%= ENV['TRELLO_DATABASE_PASSWORD'] %>
+  database: <%= ENV['DATABASE_URL'] %>  
+  # username: trello
+  # password: <%= ENV['TRELLO_DATABASE_PASSWORD'] %>
