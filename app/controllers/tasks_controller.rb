@@ -1,17 +1,19 @@
 class TasksController < ApplicationController    
     before_action :authenticate_user!
+
     def new
-        @task = Task.new()
+        @task = Task.new
         @board_id = params[:format].to_i
     end
 
     def create
         @task = Task.new(task_params)
         @task.user_id = current_user.id
+        # @task = current_user.task.new(task_params)
         if @task.save
             redirect_to(home_path(@task.board_id))
         else
-            render 'new'
+            render('new')
         end
     end
 
@@ -28,8 +30,6 @@ class TasksController < ApplicationController
         end
     end
     
-
-
     def destroy
         @task = Task.find(params[:id])
         @task.destroy
@@ -38,8 +38,9 @@ class TasksController < ApplicationController
     end
 
     private
+
     def task_params
         params.require(:task).permit(:name ,:board_id)
     end
-    
+
 end

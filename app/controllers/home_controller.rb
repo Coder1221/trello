@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   
   def show
     @tasks = Task.where(user_id: current_user.id).where(board_id: params[:id])
-    
+
     # if @tasks.length == 0
     #   redirect_to(root_path)
     # end

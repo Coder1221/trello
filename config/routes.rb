@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  # get 'subtasks/destroy'
   root to: "home#index"
-  
+ 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -31,5 +30,4 @@ Rails.application.routes.draw do
       get :delete
     end
   end
-
 end

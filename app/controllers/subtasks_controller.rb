@@ -1,10 +1,15 @@
 class SubtasksController < ApplicationController
   before_action :authenticate_user!
+  # attr_accessor :board_id
+  # before_action only: [:new , :create , :show, :edit, :update, :destroy] do
+  #   bord_id_param
+  # end
 
   def new
     @subtask = Subtask.new
-    @task_id = params[:id].to_i 
+    @task_id = params[:id].to_i
     @board_id = params[:board_id].to_i
+
   end
 
   def create
@@ -46,4 +51,10 @@ class SubtasksController < ApplicationController
   def subtask_params
     params.require(:subtask).permit(:task_id ,:title ,:description)
   end
+  
+  # def bord_id_param
+  #   @board_id = params[:board_id]
+  #   puts "Bord_id#{@board_id}"
+  # end
+
 end

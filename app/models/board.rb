@@ -1,4 +1,4 @@
-class Board < ApplicationRecord
+class Board < ApplicationRecord 
     belongs_to :user
-    has_many :task
+    has_many :task  , dependent: :destroy
 end

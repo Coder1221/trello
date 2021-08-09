@@ -6,22 +6,22 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @board = Board.new(board_params)
-    @board.user_id = current_user.id
+    @board = current_user.board.new(board_params)
+
+    # @board = Board.new(board_params)
+    # @board.user_id = current_user.id
 
     if @board.save
       flash[:notice] ="Board was successfully created"
       redirect_to(home_index_path)
     else
       flash[:notice] = board.errors.messages
-      render(:action => 'new')
+      render('new')
     end
   end
   
   def destroy
-    #  delete orphan records
     @board = Board.find(params[:id])
-    ss
     @board.destroy
     flash[:notice] = "Board was successfully deleted."
     redirect_to(home_index_path)
