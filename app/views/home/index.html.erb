@@ -1,5 +1,5 @@
 <% name = current_user.username %>
-<h1>Welcome <%= name%></h1>
+<h1>Welcome <%= name%> </h1>
 
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 140px;">
   <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
@@ -13,16 +13,18 @@
     <% @boards.each do |board| %>
       <table class="table">
         <tr> <%= board.name %> <tr>
-        <tr> <%= link_to("Show Tasks" ,{:controller => 'tasks' ,:action => 'show' , :id => board.id} ,:class=>'action show') %> </tr>  
+        <br>
+        <tr> <%= link_to("Show lists" , home_path(board)) %><tr>
         <br>
         <tr> <%= button_to "Delete" ,board_path(board), method: :delete %> </tr>
       </table>
-      <hr>
+        <hr>
     <%end%>
   </div>
     
-  <div class="Create_Board">
+  <div>
     <%= link_to('New Board' ,new_board_path , class: 'action new')%>
   </div>
-  <hr>  
+  
+  <hr>
 </div>

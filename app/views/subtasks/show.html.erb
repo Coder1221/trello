@@ -1,0 +1,12 @@
+<h1>ToDo-Information</h1>
+<br><br><br>
+<h2>Title</h2>
+<%= @todo.title %>
+<br>
+<h2>Description</h2>
+<br>
+<%= @todo.description %>
+<%= link_to("Edit" ,edit_subtask_path(@todo.id),  :class => 'action edit') %>
+
+<br>
+<%= button_to "Delete" ,subtask_path(@todo.id), method: :delete %>

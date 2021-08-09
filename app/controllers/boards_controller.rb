@@ -21,6 +21,7 @@ class BoardsController < ApplicationController
   def destroy
     #  delete orphan records
     @board = Board.find(params[:id])
+    ss
     @board.destroy
     flash[:notice] = "Board was successfully deleted."
     redirect_to(home_index_path)

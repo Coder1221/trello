@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'subtasks/destroy'
+  # get 'subtasks/destroy'
   root to: "home#index"
   
   devise_for :users, controllers: {

@@ -1,4 +1,4 @@
-<h1><%= @tasks.length>0 ? @tasks[0].board.name : "EMPTY BOARD " %></h1>
+<h1> <%= @tasks.length>0 ? @tasks[0].board.name : "EMPTY BOARD " %> </h1>
 <table>
 <tr>
     <% @tasks.each do |task| %>
@@ -11,10 +11,10 @@
                 <a class="dropdown-item" href="#">
                     <%= button_to "Delete" , task_path(task) , method: :delete %>
                 </a>
-                <a class="dropdown-item" href="#">Edit</a>
-                <a class="dropdown-item" href="#" >
+                <a class = "dropdown-item" href= <%= edit_task_path(task)%> >Edit</a>
+                <a class = "dropdown-item">
                     <%= link_to("Add subtask",
-                            {:controller =>'subtasks', :action => 'new'  , :id =>task.id  , :board_id => task.board_id}) 
+                        {:controller =>'subtasks', :action => 'new'  , :id =>task.id  , :board_id => task.board_id}) 
                     %>
                 </a>
                 </div>
@@ -23,26 +23,22 @@
     <%end%>
 
     <th>
-        <td> <%= link_to("Create-Task" , new_task_path(@board_id))%> </td>
+        <td> <%= link_to("Create-List" , new_task_path(@board_id))%> </td>
     </th>
 </tr>
-<% @index = 0 %>
-<% @tasks.each do |task|%>
-    <%if task.subtask.length > @index %>
-        <% @index = task.subtask.length %>
-    <%end%>
-<% end %>
 
 <% (0..@index).each do |i|%>
     <tr>
     <% @tasks.each do |task|%>
         <% if task.subtask[i]!=nil%>
-            <td> <%= task.subtask[i].title %></td>    
+            <td>
+                <%= link_to(task.subtask[i].title ,subtask_path(task.subtask[i].id))%>    
+            </td>  
         <%else%>
             <td></td>
         <%end%>
     <%end%>
     </tr>
 <% end %>
-    
+
 </table>

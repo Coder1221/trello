@@ -1,4 +1,5 @@
 class SubtasksController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @subtask = Subtask.new
@@ -10,10 +11,35 @@ class SubtasksController < ApplicationController
     @subtask = Subtask.new(subtask_params)
     @board_id = params[:subtask][:board_id]
     if @subtask.save
-      redirect_to(task_path(@board_id))
+      redirect_to(home_path(@board_id))
     else
-      render 'new'
+      render('new')
     end
+  end
+
+  def show
+    @todo = Subtask.find_by_id(params[:id].to_i)
+  end
+
+  def edit
+    @subtask  = Subtask.find_by_id(params[:id].to_i)
+  end
+  
+  def update
+    @subtask  = Subtask.find_by_id(params[:id].to_i)
+    if @subtask.update(subtask_params)
+      redirect_to(subtask_path(@subtask.id))
+    else
+        render('edit')
+    end
+  end
+
+  def destroy
+    @subtask = Subtask.find_by_id(params[:id].to_i)
+    @board_id = @subtask.task.board_id
+    @subtask.destroy
+    flash[:notice] = "Todo-List Deleted"
+    redirect_to(home_path(@board_id))
   end
 
   private
