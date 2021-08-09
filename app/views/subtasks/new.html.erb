@@ -1,0 +1,8 @@
+<h1>Create new Subtask</h1>
+<%= form_for(@subtask) do |f|%>
+    <%= f.text_field(:task_id, :value => @task_id)  %>
+    <%= f.text_field(:title,placeholder: 'Title') %>
+    <%= f.text_field(:description,placeholder: 'Description') %>
+    <%= f.text_field(:board_id , :value => @board_id) %>
+    <%= f.submit() %>   
+<%end%>

@@ -1,0 +1,7 @@
+<h>Create new task</h>
+
+<%= form_for(@task) do |f| %>
+    <%= f.text_field(:name) %>
+    <%= f.text_field(:board_id ,:value => @board_id)%>
+    <%= f.submit %>
+<%end%>

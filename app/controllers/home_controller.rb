@@ -5,7 +5,10 @@ class HomeController < ApplicationController
 
   def index
     @user_obj = User.find_by_id(current_user.id)  
-    @boards  = @user_obj.boards
+    @boards  = @user_obj.board
+    @tasks = Task.where(user_id: current_user.id)
+    
+    @default = @tasks.first
   end
   
 end

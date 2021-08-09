@@ -1,0 +1,48 @@
+<h1><%= @tasks.length>0 ? @tasks[0].board.name : "EMPTY BOARD " %></h1>
+<table>
+<tr>
+    <% @tasks.each do |task| %>
+        <th>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= task.name %>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">
+                    <%= button_to "Delete" , task_path(task) , method: :delete %>
+                </a>
+                <a class="dropdown-item" href="#">Edit</a>
+                <a class="dropdown-item" href="#" >
+                    <%= link_to("Add subtask",
+                            {:controller =>'subtasks', :action => 'new'  , :id =>task.id  , :board_id => task.board_id}) 
+                    %>
+                </a>
+                </div>
+            </div>
+        </th>
+    <%end%>
+
+    <th>
+        <td> <%= link_to("Create-Task" , new_task_path(@board_id))%> </td>
+    </th>
+</tr>
+<% @index = 0 %>
+<% @tasks.each do |task|%>
+    <%if task.subtask.length > @index %>
+        <% @index = task.subtask.length %>
+    <%end%>
+<% end %>
+
+<% (0..@index).each do |i|%>
+    <tr>
+    <% @tasks.each do |task|%>
+        <% if task.subtask[i]!=nil%>
+            <td> <%= task.subtask[i].title %></td>    
+        <%else%>
+            <td></td>
+        <%end%>
+    <%end%>
+    </tr>
+<% end %>
+    
+</table>

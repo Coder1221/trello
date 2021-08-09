@@ -19,6 +19,7 @@ class BoardsController < ApplicationController
   end
   
   def destroy
+    #  delete orphan records
     @board = Board.find(params[:id])
     @board.destroy
     flash[:notice] = "Board was successfully deleted."
