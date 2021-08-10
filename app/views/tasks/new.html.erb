@@ -2,5 +2,5 @@
 <%= form_for(@task) do |f| %>
     <%= f.text_field(:name) %>
     <%= f.hidden_field(:board_id , :value => @board_id) %>
-    <%= f.submit %>
+    <%= f.submit() %>
 <%end%>

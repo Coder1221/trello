@@ -1,19 +1,32 @@
 class BoardsController < ApplicationController  
   before_action :authenticate_user!
   
+  def index
+    @boards = User.find_by_id(current_user.id).board
+  end
+  
   def new
       @board = Board.new
   end
 
+  def show
+    @tasks = Task.where(user_id: current_user.id).where(board_id: params[:id])
+    @board_id = params[:id]
+    @index = 0
+    @tasks.each do |task|
+      if task.subtask.length > @index
+          @index = task.subtask.length
+      end
+    end
+  end
+
   def create
     @board = current_user.board.new(board_params)
-
     # @board = Board.new(board_params)
     # @board.user_id = current_user.id
-
     if @board.save
+      redirect_to(boards_path)
       flash[:notice] ="Board was successfully created"
-      redirect_to(home_index_path)
     else
       flash[:notice] = board.errors.messages
       render('new')
@@ -24,7 +37,7 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     @board.destroy
     flash[:notice] = "Board was successfully deleted."
-    redirect_to(home_index_path)
+    redirect_to(boards_path)
   end
 
   private

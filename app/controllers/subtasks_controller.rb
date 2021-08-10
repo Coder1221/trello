@@ -1,37 +1,36 @@
 class SubtasksController < ApplicationController
   before_action :authenticate_user!
-  # attr_accessor :board_id
-  # before_action only: [:new , :create , :show, :edit, :update, :destroy] do
-  #   bord_id_param
-  # end
+
+  def index
+    @subtasks = Subtask.all.where(:task_id => params[:format])
+  end
 
   def new
     @subtask = Subtask.new
-    @task_id = params[:id].to_i
-    @board_id = params[:board_id].to_i
-
+    @task_id = params[:id]
+    @board_id = params[:board_id]
   end
 
   def create
     @subtask = Subtask.new(subtask_params)
     @board_id = params[:subtask][:board_id]
     if @subtask.save
-      redirect_to(home_path(@board_id))
+      redirect_to(board_path(@board_id))
     else
       render('new')
     end
   end
 
   def show
-    @todo = Subtask.find_by_id(params[:id].to_i)
+    @todo = Subtask.find_by_id(params[:id])
   end
 
   def edit
-    @subtask  = Subtask.find_by_id(params[:id].to_i)
+    @subtask  = Subtask.find_by_id(params[:id])
   end
   
   def update
-    @subtask  = Subtask.find_by_id(params[:id].to_i)
+    @subtask  = Subtask.find_by_id(params[:id])
     if @subtask.update(subtask_params)
       redirect_to(subtask_path(@subtask.id))
     else
@@ -40,21 +39,16 @@ class SubtasksController < ApplicationController
   end
 
   def destroy
-    @subtask = Subtask.find_by_id(params[:id].to_i)
+    @subtask = Subtask.find_by_id(params[:id])
     @board_id = @subtask.task.board_id
     @subtask.destroy
     flash[:notice] = "Todo-List Deleted"
-    redirect_to(home_path(@board_id))
+    redirect_to(board_path(@board_id))
   end
 
   private
   def subtask_params
     params.require(:subtask).permit(:task_id ,:title ,:description)
   end
-  
-  # def bord_id_param
-  #   @board_id = params[:board_id]
-  #   puts "Bord_id#{@board_id}"
-  # end
 
 end

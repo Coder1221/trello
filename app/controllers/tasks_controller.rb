@@ -3,15 +3,14 @@ class TasksController < ApplicationController
 
     def new
         @task = Task.new
-        @board_id = params[:format].to_i
+        @board_id = params[:format]
     end
 
     def create
         @task = Task.new(task_params)
         @task.user_id = current_user.id
-        # @task = current_user.task.new(task_params)
         if @task.save
-            redirect_to(home_path(@task.board_id))
+            redirect_to(board_path(@task.board_id))
         else
             render('new')
         end
@@ -24,7 +23,7 @@ class TasksController < ApplicationController
     def update
         @task = Task.find_by_id(params[:id])
         if @task.update(task_params)
-            redirect_to(home_path(@task.board_id))
+            redirect_to(board_path(@task.board_id))
         else
             render('edit')
         end
@@ -34,7 +33,7 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
         @task.destroy
         flash[:notice] = "Task-List Deleted"
-        redirect_to(home_path(@task.board_id))
+        redirect_to(board_path(@task.board_id))
     end
 
     private
