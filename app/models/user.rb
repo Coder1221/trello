@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  # has_many :boards #  use singular_name
-  has_many :board
+  has_many :boards
   attr_accessor :login
 
   # Include default devise modules. Others available are:

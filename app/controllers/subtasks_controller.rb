@@ -42,7 +42,7 @@ class SubtasksController < ApplicationController
     @subtask = Subtask.find_by_id(params[:id])
     @board_id = @subtask.task.board_id
     @subtask.destroy
-    flash[:notice] = "Todo-List Deleted"
+    flash[:notice] = "Todo Deleted"
     redirect_to(board_path(@board_id))
   end
 

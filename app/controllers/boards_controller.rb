@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
   before_action :authenticate_user!
   
   def index
-    @boards = User.find_by_id(current_user.id).board
+    @boards = User.find_by_id(current_user.id).boards
   end
   
   def new
@@ -21,9 +21,7 @@ class BoardsController < ApplicationController
   end
 
   def create
-    @board = current_user.board.new(board_params)
-    # @board = Board.new(board_params)
-    # @board.user_id = current_user.id
+    @board = current_user.boards.new(board_params)
     if @board.save
       redirect_to(boards_path)
       flash[:notice] ="Board was successfully created"
