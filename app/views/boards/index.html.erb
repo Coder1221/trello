@@ -14,7 +14,7 @@
       <table class="table">
         <tr> <%= board.name %> <tr>
         <br>
-        <tr> <%= link_to("Show lists" , board_path(board)) %><tr>
+        <tr> <%= link_to "Show Lists" , lists_path(board_id: board.id) %><tr>
         <br>
         <tr> <%= button_to "Delete" ,board_path(board),  data: { confirm: 'Are you sure you want to delete this alert?' } ,method: :delete %> </tr>
       </table>

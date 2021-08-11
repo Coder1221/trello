@@ -15,7 +15,7 @@ class TodosController < ApplicationController
     @subtask = Todo.new(subtask_params)
     @board_id = params[:todo][:board_id]
     if @subtask.save
-      redirect_to(board_path(@board_id))
+      redirect_to(lists_path(:board_id => @board_id))
     else
       render('new')
     end
@@ -39,14 +39,15 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    @subtask = Todo.find_by_id(params[:id])
-    @board_id = @subtask.list.board_id
-    @subtask.destroy
+    @todo = Todo.find_by_id(params[:id])
+    @list_id = @todo.list.id
+    @todo.destroy
     flash[:notice] = "Todo Deleted"
-    redirect_to(board_path(@board_id))
-  end
+    redirect_to(todos_path(@list_id))
+  end 
 
   private
+
   def subtask_params
     params.require(:todo).permit(:list_id ,:title ,:description)
   end

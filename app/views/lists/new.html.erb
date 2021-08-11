@@ -1,5 +1,5 @@
 <h>Create new List</h>
-<%= form_for(@task) do |f| %>
+<%= form_for(@list) do |f| %>
     <%= f.text_field(:name) %>
     <%= f.hidden_field(:board_id , :value => @board_id) %>
     <%= f.submit() %>
