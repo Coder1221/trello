@@ -5,26 +5,26 @@
         <th>
             <div class="dropdown">
 
-                <a class = "dropdown-item" href= <%= subtasks_path(task)%> > 
+                <a class = "dropdown-item" href= <%= todos_path(task)%> > 
                     <h4><%= task.name %></h4>
                 </a>
                 
-                <a class = "dropdown-item" href= <%= edit_task_path(task)%> >Edit</a>
+                <a class = "dropdown-item" href= <%= edit_list_path(task)%> >Edit</a>
 
                 <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <%= button_to "Delete" , task_path(task) , method: :delete %>
+                    <%= button_to "Delete" , list_path(task) , method: :delete %>
                 </div>
 
                 <a class = "dropdown-item">
                     <%= link_to("Add Todo",
-                        {:controller =>'subtasks', :action => 'new'  , :id =>task.id  , :board_id => task.board_id}) 
+                        {:controller =>'todos', :action => 'new'  , :id =>task.id  , :board_id => task.board_id}) 
                     %>
                 </a>
             </div>
         </th>
     <%end%>
     <th>
-        <td> <%= link_to("Create-List" , new_task_path(@board_id))%> </td>
+        <td> <%= link_to("Create-List" , new_list_path(@board_id))%> </td>
     </th>
 </tr>
 </table>

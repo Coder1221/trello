@@ -19,13 +19,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :tasks do
+  resources :lists do
     member do
       get :delete
     end
   end
   
-  resources :subtasks do
+  resources :todos do
     member do
       get :delete
     end

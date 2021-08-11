@@ -7,7 +7,7 @@
 <%= @todo.description %>
 <br>
 <button>
-<%= link_to("Edit" ,edit_subtask_path(@todo.id),  :class => 'action edit') %>
+<%= link_to("Edit" ,edit_todo_path(@todo.id),  :class => 'action edit') %>
 </button>
 <br>
-<%= button_to "Delete" ,subtask_path(@todo.id), method: :delete %>
+<%= button_to "Delete" ,todo_path(@todo.id), method: :delete %>

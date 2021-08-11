@@ -1,13 +1,13 @@
-class TasksController < ApplicationController    
+class ListsController < ApplicationController    
     before_action :authenticate_user!
 
     def new
-        @task = Task.new
+        @task = List.new
         @board_id = params[:format]
     end
 
     def create
-        @task = Task.new(task_params)
+        @task = List.new(list_params)
         @task.user_id = current_user.id
         if @task.save
             redirect_to(board_path(@task.board_id))
@@ -17,12 +17,12 @@ class TasksController < ApplicationController
     end
 
     def edit
-        @task = Task.find_by_id(params[:id])
+        @task = List.find_by_id(params[:id])
     end
 
     def update
-        @task = Task.find_by_id(params[:id])
-        if @task.update(task_params)
+        @task = List.find_by_id(params[:id])
+        if @task.update(list_params)
             redirect_to(board_path(@task.board_id))
         else
             render('edit')
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
     end
     
     def destroy
-        @task = Task.find(params[:id])
+        @task = List.find(params[:id])
         @task.destroy
         flash[:notice] = "Task-List Deleted"
         redirect_to(board_path(@task.board_id))
@@ -38,8 +38,7 @@ class TasksController < ApplicationController
 
     private
 
-    def task_params
-        params.require(:task).permit(:name ,:board_id)
+    def list_params
+        params.require(:list).permit(:name ,:board_id)
     end
-
 end

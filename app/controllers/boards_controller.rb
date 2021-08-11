@@ -10,14 +10,8 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @tasks = Task.where(user_id: current_user.id).where(board_id: params[:id])
+    @tasks = List.where(user_id: current_user.id).where(board_id: params[:id])
     @board_id = params[:id]
-    @index = 0
-    @tasks.each do |task|
-      if task.subtask.length > @index
-          @index = task.subtask.length
-      end
-    end
   end
 
   def create
