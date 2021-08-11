@@ -5,31 +5,24 @@ class BoardsController < ApplicationController
   def index
     # @boards = User.find_by_id(current_user.id).boards    
     # @boards = Board.all()
-    # authorize! :index, @boards
   end
   
   def new
-    
   end
 
-  # def show
-    # @tasks = List.where(user_id: current_user.id).where(board_id: params[:id])
-    # @board_id = params[:id]
-  # end
-
   def create
-    @board = current_user.boards.new(board_params)  
+    # @board = current_user.boards.new(board_params)  
     if @board.save
       redirect_to(boards_path)
       flash[:notice] ="Board was successfully created"
     else
-      flash[:notice] =@board.errors.messages
+      flash[:notice] = @board.errors.messages
       render('new')
     end
   end
   
   def destroy
-    @board = Board.find(params[:id])
+    # @board = Board.find(params[:id])
     @board.destroy
     flash[:notice] = "Board was successfully deleted."
     redirect_to(boards_path)

@@ -15,7 +15,7 @@ class Ability
 
     if user.present?
       can :index , Board ,user_id: user.id
-      can :create , Board
+      can :create , Board ,user_id: user.id
       can :destroy , Board ,user_id: user.id
       
       
