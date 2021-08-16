@@ -12,6 +12,9 @@
 
 <h2>Description</h2>
 <%= @todo.description %>
+
+<h5>Status :  <%= @todo.status %></h5>
+
 <br>
 <button>
 <%= link_to("Edit" ,edit_todo_path(@todo.id),  :class => 'action edit') %>
