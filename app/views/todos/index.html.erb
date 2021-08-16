@@ -2,7 +2,7 @@
     <%= link_to '<<Back' , lists_path(:board_id => @subtasks.first.list.board_id)%>
 <% end %>
 
-<h1> <%= @subtasks.length>0 ? @subtasks[0].list.board.name : "Empty ToDo " %> </h1>
+<h1> <%= @subtasks.length>0 ? @subtasks[0].list.name : "Empty ToDo " %> </h1>
 
 <% @subtasks.each do|subtask| %>
     <hr>
