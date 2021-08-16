@@ -1,8 +1,15 @@
+<%= link_to '<<Back' , todos_path(@todo.list_id)%>
+
 <h1>ToDo-Information</h1>
 <br>
 <h2>Title</h2>
 <%= @todo.title %>
 <br>
+
+<h2>Due Date</h2>
+<%= @todo.due_date %>
+<br>
+
 <h2>Description</h2>
 <%= @todo.description %>
 <br>

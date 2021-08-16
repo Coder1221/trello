@@ -3,6 +3,9 @@ class TodosController < ApplicationController
 
   def index
     @subtasks = Todo.all.where(:list_id => params[:format])
+    
+    # @board_id = params[:format]
+    # s
   end
 
   def new
@@ -49,7 +52,7 @@ class TodosController < ApplicationController
   private
 
   def subtask_params
-    params.require(:todo).permit(:list_id ,:title ,:description)
+    params.require(:todo).permit(:list_id ,:title ,:description ,:due_date ,:status)
   end
 
 end

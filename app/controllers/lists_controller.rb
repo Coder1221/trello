@@ -7,8 +7,8 @@ class ListsController < ApplicationController
         @board_id = params[:board_id]
         @title  = @lists.length > 0 ? @lists.first.board.name : "EMPTY BOARD"
         
-
         @board_id_user = Board.find_by_id(params[:board_id])&.user&.id
+        
         if @board_id_user != current_user.id
             flash[:notice] = "You are not allowed to see this board"
             redirect_to(root_path)

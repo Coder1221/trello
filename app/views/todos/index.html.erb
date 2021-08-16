@@ -1,10 +1,19 @@
+<%= link_to '<<Back' , lists_path(:board_id => @subtasks.first.list.board_id)%>
+
 <h1> <%= @subtasks.length>0 ? @subtasks[0].list.board.name : "Empty ToDo " %> </h1>
+
 <% @subtasks.each do|subtask| %>
     <hr>
+    
     <h5>Title:</h5>
     <td>
         <%= link_to(subtask.title ,todo_path(subtask.id))%>    
     </td>
+    
+    <h2>Due Date</h2>
+        <%= subtask.due_date %>
+    <br>
+
     <h5>Description:</h5>
     <br>
     <%= subtask.description %>      
