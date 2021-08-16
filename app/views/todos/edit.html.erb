@@ -2,5 +2,7 @@
 <%= form_for(@subtask) do |f|%>
     <%= f.text_field(:title,placeholder: 'Title') %>
     <%= f.text_field(:description,placeholder: 'Description') %>
+    <%= f.date_field(:due_date) %>
+    <%= f.select :status, ["Pending","Done","Working"] %>
     <%= f.submit() %>   
 <%end%>
