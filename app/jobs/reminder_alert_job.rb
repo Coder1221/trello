@@ -3,19 +3,22 @@ class ReminderAlertJob < ApplicationJob
 
   def perform(global_id_of_boards)
     
-    Reminder.delete_all
-    
     boards = []
     
     global_id_of_boards.each do |global_id|
       boards << GlobalID::Locator.locate_signed(global_id)
     end
-
+    
+    if boards != []
+      Reminder.where(:user_id =>boards.first.user_id).delete_all
+    end
+    
     boards.each do |board|
       board.lists.each do |list|
         list.todos.each do |todo|
           if todo.due_date.present? && todo.one_day_diff? and (todo.status_Pending? or todo.status_Working?)
             Reminder.create(
+              user_id: board.user_id,
               board_name: board.name,
               list_name: list.name,
               task: todo.title,

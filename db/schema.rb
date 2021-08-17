@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_115042) do
   end
 
   create_table "reminders", force: :cascade do |t|
+    t.integer "user_id"
     t.string "board_name"
     t.string "list_name"
     t.string "task"
