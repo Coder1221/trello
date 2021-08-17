@@ -2,22 +2,21 @@ class TodosController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @subtasks = Todo.all.where(:list_id => params[:format])
-    
-    # @board_id = params[:format]
-    # s
+    @todos = Todo.all.where(:list_id => params[:list_id])
   end
 
   def new
-    @subtask = Todo.new
+    @todo = Todo.new
     @task_id = params[:id]
     @board_id = params[:board_id]
   end
 
+
   def create
-    @subtask = Todo.new(subtask_params)
+    @todo = Todo.new(todo_params)
     @board_id = params[:todo][:board_id]
-    if @subtask.save
+
+    if @todo.save
       redirect_to(lists_path(:board_id => @board_id))
     else
       render('new')
@@ -29,13 +28,14 @@ class TodosController < ApplicationController
   end
 
   def edit
-    @subtask  = Todo.find_by_id(params[:id])
+    @todo  = Todo.find_by_id(params[:id])
   end
   
   def update
-    @subtask  = Todo.find_by_id(params[:id])
-    if @subtask.update(subtask_params)
-      redirect_to(todo_path(@subtask.id))
+    @todo  = Todo.find_by_id(params[:id])
+    
+    if @todo.update(todo_params)
+      redirect_to(todo_path(@todo.id))
     else
         render('edit')
     end
@@ -46,12 +46,12 @@ class TodosController < ApplicationController
     @list_id = @todo.list.id
     @todo.destroy
     flash[:notice] = "Todo Deleted"
-    redirect_to(todos_path(@list_id))
+    redirect_to(todos_path(:list_id => @list_id))
   end 
 
   private
 
-  def subtask_params
+  def todo_params
     params.require(:todo).permit(:list_id ,:title ,:description ,:due_date ,:status)
   end
 

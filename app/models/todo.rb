@@ -5,4 +5,5 @@ class Todo < ApplicationRecord
         Done: 1,
         Working: 2 
     }, _prefix: true
+    
 end

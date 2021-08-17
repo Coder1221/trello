@@ -3,7 +3,7 @@ class BoardsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    # @boards = User.find_by_id(current_user.id).boards    
+    # @boards = User.find_by_id(current_user.id).boards
     # @boards = Board.all()
   end
   

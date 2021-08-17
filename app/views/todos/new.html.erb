@@ -1,10 +1,7 @@
 <h1>Create new Todo</h1>
-<%= form_for(@subtask) do |f|%>
-    <%= f.hidden_field(:list_id, :value => @task_id)  %>
-    <%= f.text_field(:title,placeholder: 'Title') %>
-    <%= f.text_field(:description,placeholder: 'Description') %>
-    <%= f.date_field(:due_date) %>
+<%= form_for(@todo) do |f|%>
+    <%= render(:partial =>'form', :locals => {:f=>f})%>
     <%= f.hidden_field(:board_id , :value => @board_id) %>
-    <%= f.select :status, ["Pending","Done","Working"] %>
+    <%= f.hidden_field(:list_id, :value => @task_id)  %>
     <%= f.submit() %>   
 <%end%>

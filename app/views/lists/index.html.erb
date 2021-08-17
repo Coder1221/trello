@@ -9,7 +9,7 @@
 
             <div class="dropdown">
 
-                <a class = "dropdown-item" href= <%= todos_path(list)%> > 
+                <a class = "dropdown-item" href= <%= todos_path(:list_id => list.id)%> > 
                     <h4> <%= list.name %> </h4>
                 </a>
                 
