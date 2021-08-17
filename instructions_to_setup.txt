@@ -17,3 +17,6 @@ rails db:system:change -to=postgresql --> that changed to postgress
 and then 
 we create and migrate on db
 rails db:create db:migrate
+
+reminder -> page -> jidhar wo job show ho gi -> that will create a record
+back ground process

@@ -3,8 +3,14 @@ class BoardsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    global_id_of_boards = []
+
+    @boards.each do |board|
+      global_id_of_boards << board.to_sgid.to_s
+    end
+    
+    ReminderAlertJob.perform_later(global_id_of_boards)
     # @boards = User.find_by_id(current_user.id).boards
-    # @boards = Board.all()
   end
   
   def new
