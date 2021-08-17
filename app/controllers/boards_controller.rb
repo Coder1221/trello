@@ -5,6 +5,7 @@ class BoardsController < ApplicationController
 
   def index
     # @boards = User.find_by_id(current_user.id).boards
+    @notifications_num = Reminder.where(user_id: current_user.id).count
   end
   
   def new

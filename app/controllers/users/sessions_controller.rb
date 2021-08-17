@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
     global_id_of_boards = []
     boards.each do |board|
       global_id_of_boards << board.to_sgid.to_s
-    end    
+    end
     ReminderAlertJob.perform_later(global_id_of_boards)
   end
 

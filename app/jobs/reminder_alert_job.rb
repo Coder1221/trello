@@ -8,7 +8,7 @@ class ReminderAlertJob < ApplicationJob
     global_id_of_boards.each do |global_id|
       boards << GlobalID::Locator.locate_signed(global_id)
     end
-    
+    # optimization if remainders are presnet and they are created today then dont create one retunr that set
     if boards != []
       Reminder.where(:user_id =>boards.first.user_id).delete_all
     end

@@ -7,10 +7,14 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <% if user_signed_in? %>
-            
+          <% if @notifications_num !=nil %>
             <li class="nav-item">
-              <%= link_to 'Reminders' , reminders_path , class:'nav-link'%>
+              <a type="button" class="btn btn-primary" href=<%= reminders_path %>>
+                    Notifications 
+                  <span class="badge badge-light"><%= @notifications_num %></span>
+              </a>
             </li>
+          <% end %>
 
             <li class="nav-item">
               <%= link_to 'Logout' , destroy_user_session_path , class:'nav-link' ,method: :delete %>
