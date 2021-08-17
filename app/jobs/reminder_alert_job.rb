@@ -3,7 +3,7 @@ class ReminderAlertJob < ApplicationJob
 
   def perform(global_id_of_boards)
     
-    Reminder.delete_all    
+    Reminder.delete_all
     
     boards = []
     
@@ -25,6 +25,7 @@ class ReminderAlertJob < ApplicationJob
         end
       end
     end
+
   end
 
 end
