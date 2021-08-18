@@ -10,14 +10,13 @@
     <br>
 
 <% @reminders.each do|reminder| %>
-  
-    <li class="list-group-item active" aria-current="true">
-        <p><%= reminder.board_name %> --> <%= reminder.list_name%> --> <%= reminder.task%> 
-            <div class="float-right"> Status: <%= reminder.status%></div>
-        </p>
-    </li>
-  
-  <br>
-
+    <% if reminder.user_id == current_user.id %>
+        <li class="list-group-item active" aria-current="true">
+            <p><%= reminder.board_name %> --> <%= reminder.list_name%> --> <%= reminder.task%> 
+                <div class="float-right"> Status: <%= reminder.status%></div>
+            </p>
+        </li>
+        <br>
+    <% end %>
 <% end %>
 </ul>

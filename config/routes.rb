@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    invitations: 'users/invitations' 
   }
+  
   
   #resourse full routes
   resources :home do
@@ -34,4 +36,8 @@ Rails.application.routes.draw do
       get :delete
     end
   end
+
 end
+
+
+# b49f107f8560cce6cc40607f0e09d202f6b6048a86364b5a8d11bd315180aee7
