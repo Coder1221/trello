@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :boards
-  attr_accessor :login
+  attr_accessor :login  
+  has_many :invitations, class_name: 'User', as: :invited_by
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
