@@ -2,9 +2,7 @@ class BoardsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
 
-
   def index
-    # @boards = User.find_by_id(current_user.id).boards
     @notifications_num = Reminder.where(user_id: current_user.id).count
   end
   
@@ -12,7 +10,6 @@ class BoardsController < ApplicationController
   end
 
   def create
-    # @board = current_user.boards.new(board_params)  
     if @board.save
       redirect_to(boards_path)
       flash[:notice] ="Board was successfully created"
@@ -23,7 +20,6 @@ class BoardsController < ApplicationController
   end
   
   def destroy
-    # @board = Board.find(params[:id])
     @board.destroy
     flash[:notice] = "Board was successfully deleted."
     redirect_to(boards_path)

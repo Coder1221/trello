@@ -6,6 +6,7 @@ class CreateReminders < ActiveRecord::Migration[6.1]
       t.string :list_name
       t.string :task
       t.string :status
+      t.datetime :due_date
     end
   end
 end

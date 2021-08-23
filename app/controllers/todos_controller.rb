@@ -1,12 +1,13 @@
 class TodosController < ApplicationController
   before_action :authenticate_user!
-
+  load_and_authorize_resource
+  
   def index
-    @todos = Todo.all.where(:list_id => params[:list_id])
+    @todos = @todos.where(:list_id => params[:list_id])
   end
 
   def new
-    @todo = Todo.new
+    # @todo = Todo.new
     @task_id = params[:id]
     @board_id = params[:board_id]
   end

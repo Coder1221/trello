@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   root to: "boards#index"
   # get 'reminders/index'
-  resources :reminders do
-    
-  end
+  resources :reminders
   
   devise_for :users, controllers: {
     sessions: 'users/sessions',

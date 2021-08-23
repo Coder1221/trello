@@ -1,51 +1,54 @@
 # frozen_string_literal: true 
 class Ability
   include CanCan::Ability
-
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
+    can :index , Reminder ,user_id: user.id 
 
-    if user.present?
-      can :index , Board ,user_id: user.id
-      can :create , Board ,user_id: user.id
-      can :destroy , Board ,user_id: user.id
-      
-      
-      # can :index , List do |l|
-      #   l.user_id  == user.id
-      # end
-      can :index , List  , user_id: user.id
+    # its own boards
+    if user.has_role?(:creator)
+      can :index  ,  Board , user_id: user.id
+      can :create  , Board , user_id: user.id
+      can :destroy , Board , user_id: user.id
+
+      can :index  ,  List  , user_id: user.id
       can :create , List ,user_id: user.id
       can :destroy , List ,user_id: user.id
       can :update , List ,user_id: user.id
+      
+      @list_ids = []
+      Board.where(user_id: user.id).each do |board|
+        @list_ids << board.lists.pluck(:id)
+      end
+      
+      # can :create , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
+      # can :create , Todo ,:all
+      
+      can :index , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
+      can :show , Todo  , :list_id => List.where(user_id: user.id).pluck(:id)
+      can :destroy  , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
+      can :update  ,  Todo , :list_id => List.where(user_id: user.id).pluck(:id)
+      
+    end
+    
+    if user.has_role?(:viewer)
+      can :index , Board , :id => Board.with_role(:viewer,user).pluck(:id)
+      
+      can :index , List ,  :board_id => Board.with_role(:viewer,user).pluck(:id)
+      cannot :update ,List , :board_id => Board.with_role(:viewer,user).pluck(:id)
+      cannot :destroy ,List , :board_id => Board.with_role(:viewer,user).pluck(:id)
 
+      # cannot :create ,List , :board_id => Board.with_role(:viewer,user).pluck(:id)
+      # cannot :create , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
+
+      
+      @list_ids = []
+      Board.with_role(:viewer ,user).each do |board|
+        @list_ids << board.lists.pluck(:id)
+      end
+      
+      can :index , Todo , :list_id => @list_ids.flatten
+      can :show , Todo , :list_id => @list_ids.flatten
     end
 
-
-    # The first argument to `can` is the action you are giving the user
-    # permission to do.
-    # If you pass :manage it will apply to every action. Other common actions
-    # here are :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on.
-    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
-    # class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the
-    # objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details:
-    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
 end
