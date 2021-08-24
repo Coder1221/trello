@@ -23,6 +23,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'devise_invitable'
 gem "rolify"
+gem "letter_opener", group: :development
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
