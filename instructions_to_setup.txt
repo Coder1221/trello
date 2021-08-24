@@ -20,3 +20,11 @@ rails db:create db:migrate
 
 reminder -> page -> jidhar wo job show ho gi -> that will create a record
 back ground process
+
+
+
+virtual attribute which we dont want to store in db we create getters and setters for that attribute.(those are called virtual attributes) 
+in model-> in case of adding role field we added attribute accessor in user model so that those paramters can be used in flow
+
+
+link_to and button_to are two different things when passing params to that.See documentation always

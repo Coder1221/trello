@@ -3,7 +3,7 @@ class User < ApplicationRecord
   
   has_many :boards
   
-  attr_accessor :login
+  attr_accessor :login , :invited_by_role
 
   has_many :invitations, class_name: 'User', as: :invited_by
 
