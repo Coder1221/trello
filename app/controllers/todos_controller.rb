@@ -1,7 +1,7 @@
 class TodosController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  
+
   def index
     @todos = @todos.where(:list_id => params[:list_id])
   end
@@ -10,14 +10,13 @@ class TodosController < ApplicationController
     # @todo = Todo.new
     @task_id = params[:id]
     @board_id = params[:board_id]
-  end
-
+  end 
 
   def create
     @todo = Todo.new(todo_params)
     @board_id = params[:todo][:board_id]
-
     if @todo.save
+      ReminderAlertJob.set(wait_until: @todo.due_date).perform_later(@todo)
       redirect_to(lists_path(:board_id => @board_id))
     else
       render('new')
