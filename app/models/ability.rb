@@ -10,7 +10,7 @@ class Ability
       can :manage , Board , user_id: user.id
       can :manage  , List ,user_id: user.id
       
-      @moderator_ids = []      
+      @moderator_ids = []
       user.invitations.each do |invitation|
         if invitation.has_role?(:moderator)
           @moderator_ids << invitation.id
@@ -24,6 +24,20 @@ class Ability
       end
       
       can :manage , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
+      
+      @moderator_todos_ids = []
+
+      user.invitations.each do |invitation|
+        if invitation.has_role?(:moderator)
+          Board.with_role(:moderator, invitation).each do |board|
+            board.lists.each do |list|
+              @moderator_todos_ids <<list.todos.pluck(:id)
+            end
+          end
+        end
+      end
+      
+      can :manage , Todo , :id => @moderator_todos_ids.flatten
       can :create , Todo
     end
 
