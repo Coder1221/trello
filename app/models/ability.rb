@@ -2,52 +2,55 @@
 class Ability
   include CanCan::Ability
   def initialize(user)
-    can :index , Reminder ,user_id: user.id 
+    can :read , Reminder ,user_id: user.id 
 
-    # its own boards
     if user.has_role?(:creator)
-      can :index  ,  Board , user_id: user.id
-      can :create  , Board , user_id: user.id
-      can :destroy , Board , user_id: user.id
-
-      can :index  ,  List  , user_id: user.id
-      can :create , List ,user_id: user.id
-      can :destroy , List ,user_id: user.id
-      can :update , List ,user_id: user.id
+      # manage ---> [:read[index,show] , :update[edit,update] ,:destroy,:create [new,create]] 
       
+      can :manage , Board , user_id: user.id
+      can :manage  , List ,user_id: user.id
+      
+      @moderator_ids = []      
+      user.invitations.each do |invitation|
+        if invitation.has_role?(:moderator)
+          @moderator_ids << invitation.id
+        end
+      end 
+      can :manage  , List ,user_id: @moderator_ids
+
       @list_ids = []
       Board.where(user_id: user.id).each do |board|
         @list_ids << board.lists.pluck(:id)
       end
       
-      # can :create , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
-      # can :create , Todo ,:all
-      
-      can :index , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
-      can :show , Todo  , :list_id => List.where(user_id: user.id).pluck(:id)
-      can :destroy  , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
-      can :update  ,  Todo , :list_id => List.where(user_id: user.id).pluck(:id)
-      
+      can :manage , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
+      can :create , Todo
+    end
+
+    if user.has_role?(:moderator)
+      can :read  ,  Board , :id => Board.with_role(:moderator, user).pluck(:id)
+      can :manage , List , :board_id => Board.with_role(:moderator, user).pluck(:id)
+
+      @list_ids = []
+      Board.with_role(:moderator , user).each do |board|
+        @list_ids << board.lists.pluck(:id)
+      end
+      can :read ,  Todo  ,  :list_id => @list_ids.flatten
+      can :create , Todo
     end
     
     if user.has_role?(:viewer)
-      can :index , Board , :id => Board.with_role(:viewer,user).pluck(:id)
+      can :read , Board , :id => Board.with_role(:viewer,user).pluck(:id)
       
-      can :index , List ,  :board_id => Board.with_role(:viewer,user).pluck(:id)
+      can :read , List ,  :board_id => Board.with_role(:viewer,user).pluck(:id)
       cannot :update ,List , :board_id => Board.with_role(:viewer,user).pluck(:id)
       cannot :destroy ,List , :board_id => Board.with_role(:viewer,user).pluck(:id)
-
-      # cannot :create ,List , :board_id => Board.with_role(:viewer,user).pluck(:id)
-      # cannot :create , Todo , :list_id => List.where(user_id: user.id).pluck(:id)
-
       
       @list_ids = []
       Board.with_role(:viewer ,user).each do |board|
         @list_ids << board.lists.pluck(:id)
       end
-      
-      can :index , Todo , :list_id => @list_ids.flatten
-      can :show , Todo , :list_id => @list_ids.flatten
+      can :read , Todo , :list_id => @list_ids.flatten
     end
 
   end
