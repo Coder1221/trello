@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'abdurrehman@systemplus.co'
+  default from: 'Trello <No reply>@board.com'
   layout 'mailer'
 end
