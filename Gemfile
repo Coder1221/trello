@@ -24,6 +24,9 @@ gem 'cancancan'
 gem 'devise_invitable'
 gem "rolify"
 gem "letter_opener", group: :development
+gem "figaro"
+gem "sidekiq"
+  
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
