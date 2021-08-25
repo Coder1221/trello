@@ -49,7 +49,7 @@ class Ability
       Board.with_role(:moderator , user).each do |board|
         @list_ids << board.lists.pluck(:id)
       end
-      can :read ,  Todo  ,  :list_id => @list_ids.flatten
+      can :manage ,  Todo  ,  :list_id => @list_ids.flatten
       can :create , Todo
     end
     
