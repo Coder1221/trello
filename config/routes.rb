@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     invitations: 'users/invitations'
   }
   #------------------------------------------------------- 
-  authenticate :user, do
+  authenticate :user do
     mount Sidekiq::Web => '/sidekiq'
   end
   # get '/sidekiq' => redirect('/')
