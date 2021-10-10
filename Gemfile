@@ -26,7 +26,8 @@ gem "rolify"
 gem "letter_opener", group: :development
 gem "figaro"
 gem "sidekiq"
-  
+gem "rexml"
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
