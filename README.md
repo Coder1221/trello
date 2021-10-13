@@ -1,5 +1,5 @@
 # README
-----------husky init ------------------------------
+----------husky init ------------------------------\
 npx husky --init && npm install
 mkdir .husky
 npx husky install ./husky
