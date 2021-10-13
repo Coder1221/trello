@@ -12,3 +12,5 @@ npx commmitizen init .
 commitizen init cz-conventional-changelog --save --save-exact
 instead of git commit use git cz
 -----------------test init------------------------------
+delete already present test folder
+rpsec --init
