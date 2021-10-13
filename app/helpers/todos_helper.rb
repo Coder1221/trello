@@ -1,2 +1,2 @@
-module SubtasksHelper
+module TodosHelper
 end

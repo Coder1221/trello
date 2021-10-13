@@ -33,7 +33,7 @@ gem "rexml"
 
 #  added post gress
 gem 'pg', '~> 1.1'
-
+gem 'rspec-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
