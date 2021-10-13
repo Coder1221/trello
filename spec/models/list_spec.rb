@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe List, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:list) { List.new }
+  let(:board) { Board.new }
+  describe "#initialize" do
+    it "List witout board does not exists" do
+      expect(subject.save).to eq(false)
+    end
+  end
 end
