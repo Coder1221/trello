@@ -10,7 +10,8 @@ sudo chmod +X commit-msg (for making file executable)
 -----------commtizen init-----------------
 npx commmitizen init .
 commitizen init cz-conventional-changelog --save --save-exact
-
+instead of git commit use git cz
+-----------------------------------------------------
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
