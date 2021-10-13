@@ -13,5 +13,6 @@ commitizen init cz-conventional-changelog --save --save-exact
 instead of git commit use git cz
 -----------------test init------------------------------
 delete already present test folder
-rpsec --init
+rpsec --init (not worked properly so used the below command) | missed rails helpers files
+rails g rspec:install
 rails g rspec:model (Name of model)
