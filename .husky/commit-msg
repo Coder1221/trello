@@ -5,3 +5,4 @@ if ! head -1 "$1" | grep -qE "^(feat|fix|ci|chore|docs|test|style|refactor|perf|
     echo "You can read more details about commit message formatting in DEVELOPMENT.md "
     exit 1
 fi
+git cz
