@@ -14,3 +14,4 @@ instead of git commit use git cz
 -----------------test init------------------------------
 delete already present test folder
 rpsec --init
+rails g rspec:model (Name of model)
