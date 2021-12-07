@@ -1,34 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/">Trello</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <% if user_signed_in? %>
-          <% if @notifications_num !=nil %>
-            <li class="nav-item">
-              <a type="button" class="btn btn-primary" href=<%= reminders_path %>>
-                    Notifications 
-                  <span class="badge badge-light"><%= @notifications_num %></span>
-              </a>
-            </li>
-          <% end %>
+<nav class= "bg-gray-200">
+    <div class = "max-w-7xl h-10 mx-auto">
+      <div class= "flex justify-between py-1.5">
+        <div class = "flex justify-between space-x-4">
+          <div>
+            <a herf ='#' class = 'flex'>
+              <svg class = 'h-6 w-6 mr-1 text-blue-500' xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+              </svg>
+              <span>Trello Clone</span>    
+            </a>
+          </div>
+        </div>
 
-            <li class="nav-item">
-              <%= link_to 'Logout' , destroy_user_session_path , class:'nav-link' ,method: :delete %>
-            </li>
-        <% else %>
-            <li class="nav-item">
-                <%= link_to 'Register' ,new_user_registration_path, class: 'nav-link' %>
-            </li>
-            
-            <li class="nav-item" >
-                <%= link_to 'Sign in' , new_user_session_path , class: 'nav-link' %>
-            </li>
-        <% end %>
-      </ul>
+        <div>
+          <% if user_signed_in? %>
+            <% if @notifications_num != nil %>
+      
+                <a href=<%= reminders_path %>>
+                      Notifications 
+                    <span> <%= @notifications_num %> </span>
+                </a>
+                
+            <% end %>
+              <%= link_to 'Logout' , destroy_user_session_path ,method: :delete %>
+          <% else %>
+              <div>
+                <%= link_to 'Register' ,new_user_registration_path %>
+                <%= link_to 'Sign in' , new_user_session_path %>
+              </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  </div>
 </nav>
