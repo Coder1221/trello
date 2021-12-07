@@ -1,16 +1,10 @@
 class User < ApplicationRecord
   rolify strict: true
-  
-  has_many :boards
-  
+  has_many :boards , dependent: :destroy
   attr_accessor :login , :invited_by_role
-
   has_many :invitations, class_name: 'User', as: :invited_by
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable 
-
+  # callbacks
   after_create :assign_default_role
   
   def assign_default_role
