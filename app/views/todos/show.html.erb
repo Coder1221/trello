@@ -17,9 +17,6 @@
 
 <br>
 <% unless current_user.has_role?(:viewer ,Board.find(@todo.list.board.id))%>
-    <button>
-        <%= link_to("Edit" ,edit_todo_path(@todo.id),  :class => 'action edit') %>
-    </button>
-    <br>
-    <%= button_to "Delete" ,todo_path(@todo.id), method: :delete %>
+    <%= link_to("Edit/Update" ,edit_todo_path(@todo.id),  :class => 'action edit bg-blue-500 hover:bg-blue-700 text-white font-bold rounded' ) %>
+    <%= button_to "Delete" ,todo_path(@todo.id), method: :delete , class: "bg-blue-500 hover:bg-blue-700 text-white font-bold rounded p-2" %>
 <%end%>

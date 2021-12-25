@@ -1,16 +1,30 @@
-<%= link_to '<<Back' , boards_path%>
-<h1> <%= @title %> </h1>
+<div>
+    <a herf= <%= boards_path %> class= 'bg-gray-100'>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0019 16V8a1 1 0 00-1.6-.8l-5.333 4zM4.066 11.2a1 1 0 000 1.6l5.334 4A1 1 0 0011 16V8a1 1 0 00-1.6-.8l-5.334 4z" />
+        </svg>
+    </a>
+</div>
+<%# link_to '<<Back' , boards_path%>
+
+<div class = 'grid bg-red-300 content-center' >
+    <div>
+        <%= @title %>
+    </div>
+</div>
+
 <table>
 
 <tr>
-
     <% @lists.each do |list| %>
         <th>
 
             <div class="dropdown">
 
                 <a class = "dropdown-item" href= <%= todos_path(:list_id => list.id)%> > 
-                    <h4> <%= list.name %> </h4>
+                    <div class= 'text-3xl hover:text-base italic'> 
+                        <%= list.name %>
+                    </div>
                 </a>
                 
                 <% unless current_user.has_role?(:viewer ,Board.find(list.board.id))%>
@@ -18,7 +32,7 @@
                         Edit List
                     </a>
                     <div data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <%= button_to "Delete List" , list_path(list) , method: :delete %>
+                        <%= button_to "Delete List" , list_path(list) , method: :delete ,class: "bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-2 py-1" %>
                     </div>
         
                     <a class = "dropdown-item" href= <%= new_todo_path(:id=> list.id ,:board_id =>@board_id)%> >
@@ -33,9 +47,9 @@
     <%end%>
 
     <% unless current_user.has_role?(:viewer, Board.find(@board_id)) %>
-    <th>
-        <td> <%= link_to("Create-List" , new_list_path(@board_id))%> </td>
-    </th>
+        <th>
+            <td> <%= link_to "Create-List" , new_list_path(@board_id) ,class:"bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-2 py-1" %> </td>
+        </th>
     <%end%>
 
 </tr>

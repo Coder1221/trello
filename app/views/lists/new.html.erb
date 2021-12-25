@@ -1,6 +1,15 @@
-<h>Create new List</h>
+<div class= "text-lg font-bold">
+    Create new List
+</div>
+
 <%= form_for(@list) do |f| %>
-    <%= f.text_field(:name) %>
-    <%= f.hidden_field(:board_id , :value => @board_id) %>
-    <%= f.submit() %>
+    <div class= 'flex'>
+        <div class = 'field'>
+            <%= f.text_field :name ,autofocus: true , class: "rounded bg-white shadow-md py-2 px-3" %>
+        </div>
+        <%= f.hidden_field(:board_id , :value => @board_id) %>
+        <div class='field px-2'>
+            <%= f.submit class: "bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-3 py-2" %>
+        </div>
+    </div>
 <%end%>
