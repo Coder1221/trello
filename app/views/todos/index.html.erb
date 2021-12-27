@@ -1,24 +1,41 @@
 <% if @todos.length != 0 %>
     <%= link_to '<<Back' , lists_path(:board_id => @todos.first.list.board_id)%>
 <% end %>
+<div class = 'bg-red-300 font-bold'>
+    <%= @todos.length>0 ? @todos[0].list.name : "Empty ToDo " %> 
+</div>
+<div class = 'grid grid-cols-2 gap-4'>
+    <% @todos.each do|todo| %>
+    <div class = 'bg-gray-300 px-2'>
+        <div class = 'flex justify-around'>
+            <div class = 'flex py-2'>
+                <div class = 'text-md font-bold'>
+                    Title:
+                </div>
+            
+                <div class ="px-2 text-blue-700 rounded border-4 border-indigo-500/100" >
+                    <%= link_to todo.title ,todo_path(todo.id) %>    
+                </div>
+            </div>
 
-<h1> <%= @todos.length>0 ? @todos[0].list.name : "Empty ToDo " %> </h1>
+            <div class = "text-red-900">
+                Due Date:
+                <%= todo.due_date.strftime("%d-%m-%Y") %>
+            </div>
+            
+            <div class= "text-blue-900">
+                Status :  <%= todo.status %>
+            </div>
 
-<% @todos.each do|todo| %>
-    <hr>
-    
-    <h5>Title:</h5>
-    <td>
-        <%= link_to(todo.title ,todo_path(todo.id))%>    
-    </td>
-    
-    <h2>Due Date</h2>
-        <%= todo.due_date.strftime("%d-%m-%Y") %>
-    <br>
+        </div>
 
-    <h5>Description:</h5>
-    <br>
-    <%= todo.description %>      
-    <h5>Status :  <%= todo.status %></h5>
-
-<%end%>
+        <div class = "text-md font-bold">
+            Description:
+        </div>
+        
+        <p>
+            <%= todo.description %>
+        </p>
+    </div>
+    <%end%>
+</div>

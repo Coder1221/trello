@@ -5,12 +5,12 @@
 
   <div class="field">
     <%= f.label :username %><br/>
-    <%= f.text_field :username ,autofocus: true %>
+    <%= f.text_field :username , autofocus: true , class: "rounded bg-white shadow-md py-2 px-3" %>
   </div>
   
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "rounded bg-white shadow-md py-2 px-3"%>
   </div>
 
   <div class="field">
@@ -18,17 +18,18 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "rounded bg-white shadow-md py-2 px-3" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password"  , class: "rounded bg-white shadow-md py-2 px-3"%>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
+  <div class = 'flex'>
+    <div class="actions">
+      <%= f.submit "Sign up" , class: "bg-blue-500 hover:bg-blue-700 text-white font-bold rounded px-3 py-2" %>
+    </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+  <%= render "users/shared/links" %>
+</div>
